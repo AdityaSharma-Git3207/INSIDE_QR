@@ -4,12 +4,14 @@ from renderer import QRRenderer
 matrix = QRMatrix()
 
 matrix.add_finder_patterns()
+matrix.add_separator()
+matrix.add_timing_patterns()
 
 renderer = QRRenderer()
 
 renderer.render(
     matrix.matrix,
-    "output/step2_finder_patterns.png",
+    "output/step3_timing_patterns.png",
 )
 
-print("Finder patterns created!")
+print("Timing patterns added!")

@@ -41,3 +41,38 @@ class QRMatrix:
         self.add_finder_pattern(0, 0)
         self.add_finder_pattern(0, 14)
         self.add_finder_pattern(14, 0)
+    
+    def add_separator(self):
+        """
+            Adds the mandatory white border around finder patterns.
+        """
+
+        positions = [
+            (0, 0),
+            (0, 14),
+            (14, 0),
+        ]
+
+        for start_row, start_col in positions:
+
+            # Top & Bottom
+            for c in range(-1, 8):
+                self.set(start_row - 1, start_col + c, 0)
+                self.set(start_row + 7, start_col + c, 0)
+
+            # Left & Right
+            for r in range(7):
+                self.set(start_row + r, start_col - 1, 0)
+                self.set(start_row + r, start_col + 7, 0)
+
+    def add_timing_patterns(self):
+        """
+            Draw alternating timing patterns.
+        """
+
+        for i in range(8, 13):
+
+            value = 1 if i % 2 == 0 else 0
+
+            self.set(6, i, value)
+            self.set(i, 6, value)
