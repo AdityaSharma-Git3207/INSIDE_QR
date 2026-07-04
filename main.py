@@ -3,10 +3,13 @@ from renderer import QRRenderer
 
 matrix = QRMatrix()
 
+matrix.add_finder_patterns()
+
 renderer = QRRenderer()
 
 renderer.render(
     matrix.matrix,
-    "output/step1_blank_matrix.png",
+    "output/step2_finder_patterns.png",
 )
-print("Done!")
+
+print("Finder patterns created!")

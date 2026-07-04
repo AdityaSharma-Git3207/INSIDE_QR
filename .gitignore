@@ -3,8 +3,11 @@ __pycache__/
 *.py[cod]
 .venv/
 
-# Generated output
-output/
+# Generated images
+output/*.png
+
+# Keep the folder
+!output/.gitkeep
 
 # macOS
 .DS_Store
