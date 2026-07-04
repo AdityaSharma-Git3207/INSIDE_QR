@@ -1,10 +1,20 @@
 from PIL import Image
+from constants import Module
+
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 
 
 class QRRenderer:
+    """
+    Renders a QR matrix as a PNG image.
+    """
+
     CELL_SIZE = 20
 
     def render(self, matrix, filename):
+
         size = len(matrix)
 
         image = Image.new(
@@ -13,7 +23,7 @@ class QRRenderer:
                 size * self.CELL_SIZE,
                 size * self.CELL_SIZE,
             ),
-            "white",
+            WHITE,
         )
 
         pixels = image.load()
@@ -21,9 +31,7 @@ class QRRenderer:
         for row in range(size):
             for col in range(size):
 
-                value = matrix[row][col]
-
-                if value:
+                if matrix[row][col] == Module.BLACK:
 
                     for y in range(self.CELL_SIZE):
                         for x in range(self.CELL_SIZE):
@@ -31,6 +39,6 @@ class QRRenderer:
                             pixels[
                                 col * self.CELL_SIZE + x,
                                 row * self.CELL_SIZE + y,
-                            ] = (0, 0, 0)
+                            ] = BLACK
 
         image.save(filename)
