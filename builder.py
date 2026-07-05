@@ -1,5 +1,6 @@
 from matrix import QRMatrix
 from encoder import QREncoder
+from error_correction import QRErrorCorrection
 
 
 class QRCodeBuilder:
@@ -10,6 +11,7 @@ class QRCodeBuilder:
     def __init__(self):
         self.matrix = QRMatrix()
         self.encoder = QREncoder()
+        self.error = QRErrorCorrection()
 
     def build_function_patterns(self):
         """
@@ -27,3 +29,6 @@ class QRCodeBuilder:
 
     def get_matrix(self):
         return self.matrix.matrix
+    
+    def generate_error_correction(self, data):
+        return self.error.generate(data)

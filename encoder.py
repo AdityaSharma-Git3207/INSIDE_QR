@@ -42,3 +42,15 @@ class QREncoder:
             pad_index ^= 1
 
         return bits[:self.MAX_BITS]
+    
+    def to_codewords(self, bits):
+
+        codewords = []
+
+        for i in range(0, len(bits), 8):
+
+            codewords.append(
+                int(bits[i:i+8], 2)
+            )
+
+        return codewords

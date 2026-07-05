@@ -1,9 +1,14 @@
-from builder import QRCodeBuilder
+from real_qr import RealQRCode
 
-builder = QRCodeBuilder()
+qr = RealQRCode()
 
-bits = builder.encode_data("HELLO")
+text = input("Enter text or URL: ")
 
-print(bits)
-print()
-print("Length:", len(bits))
+filename = input("Output filename (without extension): ")
+
+qr.generate(
+    text,
+    f"output/{filename}.png",
+)
+
+print(f"\nQR Code saved as output/{filename}.png")
