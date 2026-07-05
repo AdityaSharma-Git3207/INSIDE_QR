@@ -118,3 +118,50 @@ class QRMatrix:
 
             self.set(6, i, value)
             self.set(i, 6, value)
+    
+    def add_dark_module(self):
+        """
+        Add the fixed dark module required by
+        the QR code specification.
+        """
+
+        self.set(
+            13,
+            8,
+            Module.BLACK
+        )
+    
+    def reserve_format_information(self):
+        """
+        Reserve the modules used for format information.
+        """
+
+        # Around top-left finder
+
+        for col in range(9):
+            if col != 6:
+                if self.get(8, col) == Module.EMPTY:
+                    self.set(8, col, Module.RESERVED)
+
+        for row in range(9):
+            if row != 6:
+                if self.get(row, 8) == Module.EMPTY:
+                    self.set(row, 8, Module.RESERVED)
+
+        # Top-right
+
+        for col in range(13, 21):
+            self.set(
+                8,
+                col,
+                Module.RESERVED,
+            )
+
+        # Bottom-left
+
+        for row in range(13, 21):
+            self.set(
+                row,
+                8,
+                Module.RESERVED,
+            )

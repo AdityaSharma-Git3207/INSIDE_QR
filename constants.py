@@ -7,5 +7,8 @@ class Module(IntEnum):
     """
 
     EMPTY = -1
+
     WHITE = 0
     BLACK = 1
+
+    RESERVED = 2

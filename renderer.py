@@ -4,6 +4,7 @@ from constants import Module
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+GRAY = (180, 180, 180)
 
 
 class QRRenderer:
@@ -14,7 +15,6 @@ class QRRenderer:
     CELL_SIZE = 20
 
     def render(self, matrix, filename):
-
         size = len(matrix)
 
         image = Image.new(
@@ -31,14 +31,22 @@ class QRRenderer:
         for row in range(size):
             for col in range(size):
 
-                if matrix[row][col] == Module.BLACK:
+                value = matrix[row][col]
 
-                    for y in range(self.CELL_SIZE):
-                        for x in range(self.CELL_SIZE):
+                if value == Module.BLACK:
+                    color = BLACK
 
-                            pixels[
-                                col * self.CELL_SIZE + x,
-                                row * self.CELL_SIZE + y,
-                            ] = BLACK
+                elif value == Module.RESERVED:
+                    color = GRAY
+
+                else:
+                    continue
+
+                for y in range(self.CELL_SIZE):
+                    for x in range(self.CELL_SIZE):
+                        pixels[
+                            col * self.CELL_SIZE + x,
+                            row * self.CELL_SIZE + y,
+                        ] = color
 
         image.save(filename)
